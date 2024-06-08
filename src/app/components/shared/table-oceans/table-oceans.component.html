@@ -1,0 +1,45 @@
+
+<div class="container">
+  <form [formGroup]="searchForm">
+    <po-select formControlName="regiao" [p-options]="regioes" class="po-md-4" p-label="Regiões">
+    </po-select>
+    <po-select formControlName="especies" [p-options]="species" class="po-md-4" p-label="Especies">
+    </po-select>
+    <po-select formControlName="niveis" [p-options]="niveis" class="po-md-4" p-label="Niveis">
+    </po-select>
+    <po-select formControlName="statusConservacao" [p-options]="statusConservacao" class="po-md-4" p-label="Status Conservacao">
+    </po-select>
+    <po-input formControlName="ph" class="po-md-4" p-label="Ph" p-placeholder="7 a 10"></po-input>
+    <po-input formControlName="temperaturaAgua" class="po-md-4" p-label="Temperatura da Agua" p-placeholder="-2 a 30"></po-input>
+
+    <po-button (p-click)="clear()" p-label="Limpar" class="po-md-6"></po-button>
+    <po-button (p-click)="search()" p-label="Pesquisar" class="po-md-6"></po-button>
+  </form>
+
+  <po-table [p-columns]="columns" [p-items]="oceans" [p-loading]="isLoading" [p-loading-show-more]="isLoading"
+    (p-show-more)="loadMore()" [p-show-more-disabled]="!hasNext" p-text-wrap="true">
+    <ng-template p-table-cell-template let-column="column" let-row="row">
+
+      <div *ngIf="column.property === 'actions'" class="po-row">
+        <po-tag *ngIf="!row.enabled" [p-value]="'Especies: '+row.especies.length"
+          (p-click)="openModalEspecies(row.especies)"></po-tag>
+
+          <po-modal #modalEspecies p-title="Especies" >
+            <po-table [p-items]="especies" [p-hide-columns-manager]="true">
+            </po-table>
+          </po-modal>
+      </div>
+
+      <div *ngIf="column.property === 'projetos'" class="po-row">
+        <po-tag *ngIf="!row.enabled" [p-value]="'Projetos: '+row.projetosConservacao.length"
+          (p-click)="openProjetosModal(row.projetosConservacao)"></po-tag>
+
+          <po-modal #modalProjetos p-title="Projetos">
+            <po-table [p-items]="projetos" [p-hide-columns-manager]="true">
+            </po-table>
+          </po-modal>
+      </div>
+    </ng-template>
+
+  </po-table>
+</div>
