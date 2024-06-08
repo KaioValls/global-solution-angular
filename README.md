@@ -4,6 +4,7 @@ Para executar o programa, primeiramente faça o clone do projeto para sua maquin
 
 Gabriel Gonçalves Valls - RM 95590
 Kaio dos Santos Valls - RM 94685
+Luana Fumes de Aquino - RM 93074
 
 ## Instalação
 
